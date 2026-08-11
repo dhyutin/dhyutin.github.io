@@ -1,0 +1,255 @@
+/* ==========================================================================
+   Sree Dhyuti Nimmagadda — academic profile
+   Single-column researcher-style layout. Light (default) and dark themes;
+   a thin sari-border stripe and marigold links kept as a quiet signature.
+   ========================================================================== */
+
+:root {
+  --bg: #fdfbf6;
+  --surface: #f6f1e6;
+  --border: rgba(120, 100, 60, 0.22);
+  --border-soft: rgba(120, 100, 60, 0.13);
+  --text: #2b2333;
+  --muted: #675d74;
+  --faint: #93889d;
+  --accent: #b06e00;         /* deep marigold */
+  --accent-hover: #8a5600;
+  --teal: #0d7f74;
+  --rani: #bb3663;
+  --sari-border: linear-gradient(90deg, #b58a2a, #e08900 25%, #d64277 55%, #8b58e8 80%, #0d9184);
+  --header-bg: rgba(253, 251, 246, 0.92);
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --nav-h: 54px;
+}
+
+html[data-theme="dark"] {
+  --bg: #14111f;
+  --surface: #1d1830;
+  --border: rgba(210, 185, 130, 0.24);
+  --border-soft: rgba(210, 185, 130, 0.13);
+  --text: #ece7dc;
+  --muted: #aca2be;
+  --faint: #81768f;
+  --accent: #ffb141;
+  --accent-hover: #ffc873;
+  --teal: #43cabb;
+  --rani: #ef7ba1;
+  --header-bg: rgba(20, 17, 31, 0.92);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s, color 0.3s;
+}
+/* thin sari-border stripe across the very top */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--sari-border);
+  z-index: 200;
+}
+
+img { max-width: 100%; display: block; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 22px; }
+
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; line-height: 1.3; }
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-soft);
+  padding-top: 3px; /* clear the sari stripe */
+}
+.nav-wrap {
+  min-height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.brand {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--text);
+}
+.brand:hover { color: var(--text); text-decoration: none; }
+.site-header nav { display: flex; align-items: center; gap: 4px 14px; flex-wrap: wrap; }
+.site-header nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.site-header nav a:hover { color: var(--accent); text-decoration: none; }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  margin-left: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   About
+   -------------------------------------------------------------------------- */
+.about {
+  max-width: 700px;
+  padding: 56px 0 8px;
+}
+.about h1 { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+.about .role { color: var(--muted); font-size: 16px; margin-bottom: 18px; }
+.about p + p { margin-top: 14px; }
+.about-text p { color: var(--text); }
+.about-text strong { font-weight: 600; }
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 20px;
+}
+.links a { font-size: 14.5px; font-weight: 500; }
+.links i { margin-right: 4px; }
+
+@media (max-width: 640px) {
+  .about { padding-top: 36px; }
+}
+
+/* --------------------------------------------------------------------------
+   Sections
+   -------------------------------------------------------------------------- */
+section { padding: 30px 0 6px; }
+main > section { border-top: none; }
+
+h2 {
+  font-size: 23px;
+  margin-bottom: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+}
+section:first-of-type h2 { border-top: none; padding-top: 0; }
+
+.section-note { color: var(--text); max-width: 700px; }
+
+/* --------------------------------------------------------------------------
+   News + CV-style lists
+   -------------------------------------------------------------------------- */
+.news-list, .cv-list { list-style: none; }
+.news-list li, .cv-list li {
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 14px;
+  padding: 5px 0;
+}
+.cv-list li { padding: 9px 0; }
+.news-list .date, .cv-list .date {
+  color: var(--faint);
+  font-size: 13.5px;
+  font-weight: 500;
+  padding-top: 2px;
+  white-space: nowrap;
+}
+.cv-list li div { color: var(--muted); }
+.cv-list li strong { color: var(--text); font-weight: 600; }
+.cv-list.plain li { padding: 4px 0; }
+.cv-list.plain li div { color: var(--text); }
+
+@media (max-width: 560px) {
+  .news-list li, .cv-list li { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Publications
+   -------------------------------------------------------------------------- */
+.pub-list { list-style: none; }
+.pub-list li { padding: 6px 0; }
+.pub-title { font-weight: 600; }
+.pub-authors { font-size: 14.5px; color: var(--muted); }
+.pub-authors strong { color: var(--text); }
+.pub-venue { font-size: 14.5px; font-style: italic; color: var(--muted); }
+
+/* --------------------------------------------------------------------------
+   Projects — compact media rows
+   -------------------------------------------------------------------------- */
+.proj-group + .proj-group { margin-top: 26px; }
+.proj-cat {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 2px;
+}
+.proj { padding: 13px 0; }
+.proj + .proj { border-top: 1px solid var(--border-soft); }
+.proj-body h4 { font-family: var(--font-serif); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+.proj-body p { color: var(--muted); font-size: 14.5px; }
+.proj-body em { color: var(--rani); font-style: normal; font-weight: 500; }
+.code-link { font-family: var(--font-sans); font-size: 13.5px; font-weight: 500; }
+
+/* --------------------------------------------------------------------------
+   Music
+   -------------------------------------------------------------------------- */
+.music-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.music-grid iframe {
+  width: 100%;
+  height: 130px;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+}
+@media (max-width: 560px) { .music-grid { grid-template-columns: 1fr; } }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  margin-top: 48px;
+  padding: 22px 0 30px;
+  border-top: 1px solid var(--border-soft);
+  color: var(--faint);
+  font-size: 13.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
